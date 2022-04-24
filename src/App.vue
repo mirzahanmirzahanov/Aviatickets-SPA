@@ -1,30 +1,32 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+input[type="date"]::-webkit-calendar-picker-indicator {
+  margin: 0;
+}
+.number,
+.seat,
+.letter {
+  width: 30px;
   text-align: center;
-  color: #2c3e50;
+  margin: 0 1px;
 }
-
-nav {
-  padding: 30px;
+.seat {
+  border: 1px solid black;
+  background-color: #f5f5f5;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.logo {
+  height: 40px;
 }
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.seat-busy {
+  background-color: #8c8c8c;
+}
+.seat-selected {
+  background-color: #72ec81;
+}
+.selected {
+  background-color: silver;
 }
 </style>
