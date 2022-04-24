@@ -9,9 +9,9 @@
       </div>
 
       <h5 class="mt-4 mb-3 text-white">
-        <span class="test-4-fif1">Kazan</span>
+        <span class="test-4-fif1">{{ this.$route.query.from }}</span>
         ->
-        <span class="test-4-fit1">Moscow</span>
+        <span class="test-4-fit1">{{ this.$route.query.to }}</span>
       </h5>
       <table class="table table-bordered text-white bg-secondary">
         <tr>
@@ -22,42 +22,26 @@
           <th>Flight time</th>
           <th>Cost</th>
         </tr>
-        <tr>
-          <td class="test-4-fn">FC 2144</td>
+        <tr v-for="flight in FLIGHTS.flightsTo" :key="flight.index">
+          <td class="test-4-fn">{{ flight.flight_code }}</td>
           <td class="test-4-at">Bombardier CRJ200</td>
           <td>
-            <span class="test-4-dd">10-09-2022</span>
+            <span class="test-4-dd">{{ flight.from.date }} </span>
             at
-            <span class="test-4-dt">08:00</span>
+            <span class="test-4-dt">{{ flight.from.time }}</span>
           </td>
-          <td class="test-4-aatime">09:30</td>
+          <td class="test-4-aatime">{{ flight.to.time }}</td>
           <td class="test-4-ft">
             <span class="test-4-fhour">1</span>h
             <span class="test-4-fminutes">30</span>min
           </td>
-          <td class="test-4-fp">8000</td>
-        </tr>
-        <tr>
-          <td class="test-4-fn">FC 2162</td>
-          <td class="test-4-at">Bombardier CRJ200</td>
-          <td>
-            <span class="test-4-dd">10-09-2022</span>
-            at
-            <span class="test-4-dt">12:00</span>
-          </td>
-          <td class="test-4-aatime">13:30</td>
-          <td class="test-4-ft">
-            <span class="test-4-fhour">1</span>h
-            <span class="test-4-fminutes">30</span>min
-          </td>
-          <td class="test-4-fp">8000</td>
+          <td class="test-4-fp">{{ flight.flight_code }}</td>
         </tr>
       </table>
-
       <h5 class="mt-4 mb-3 text-white">
-        <span class="test-4-fif2">Moscow</span>
+        <span class="test-4-fif1">{{ this.$route.query.to }}</span>
         ->
-        <span class="test-4-fit2">Kazan</span>
+        <span class="test-4-fit1">{{ this.$route.query.from }}</span>
       </h5>
       <table class="table table-bordered text-white bg-secondary">
         <tr>
@@ -68,35 +52,20 @@
           <th>Flight time</th>
           <th>Cost</th>
         </tr>
-        <tr>
-          <td class="test-4-fn">FC 2143</td>
+        <tr v-for="flight in FLIGHTS.flightsBack" :key="flight.index">
+          <td class="test-4-fn">{{ flight.flight_code }}</td>
           <td class="test-4-at">Bombardier CRJ200</td>
           <td>
-            <span class="test-4-dd">20-09-2022</span>
+            <span class="test-4-dd">{{ flight.from.date }} </span>
             at
-            <span class="test-4-dt">06:00</span>
+            <span class="test-4-dt">{{ flight.from.time }}</span>
           </td>
-          <td class="test-4-aatime">07:30</td>
+          <td class="test-4-aatime">{{ flight.to.time }}</td>
           <td class="test-4-ft">
             <span class="test-4-fhour">1</span>h
             <span class="test-4-fminutes">30</span>min
           </td>
-          <td class="test-4-fp">9000</td>
-        </tr>
-        <tr>
-          <td class="test-4-fn">FC 2161</td>
-          <td class="test-4-aatime">Bombardier CRJ200</td>
-          <td>
-            <span class="test-4-dd">20-09-2022</span>
-            at
-            <span class="test-4-dt">10:00</span>
-          </td>
-          <td class="test-4-at">11:30</td>
-          <td class="test-4-ft">
-            <span class="test-4-fhour">1</span>h
-            <span class="test-4-fminutes">30</span>min
-          </td>
-          <td class="test-4-fp">9000</td>
+          <td class="test-4-fp">{{ flight.flight_code }}</td>
         </tr>
       </table>
 
@@ -108,7 +77,14 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters(["FLIGHTS"]),
+  },
+  data: () => ({}),
+};
 </script>
 
 <style>

@@ -1,14 +1,15 @@
 <template>
-  <section class="mt-5">
+  <section class="mt-5" :formData="this.form">
     <h2 class="mb-4 text-white">Flight search</h2>
 
-    <form action="search.html">
+    <form @submit.prevent>
       <div class="row">
         <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pr-lg-0">
           <input
             type="text"
             class="form-control test-0-fd w-100"
             placeholder="From where"
+            v-model="form.from"
           />
           <div class="invalid-feedback">Error message</div>
         </div>
@@ -17,6 +18,7 @@
             type="text"
             class="form-control test-0-fa w-100"
             placeholder="To where"
+            v-model="form.to"
           />
           <div class="invalid-feedback">Error message</div>
         </div>
@@ -25,6 +27,7 @@
             type="text"
             class="form-control test-0-fdt"
             placeholder="Departing"
+            v-model="form.date1"
           />
           <div class="invalid-feedback">Error message</div>
         </div>
@@ -33,11 +36,12 @@
             type="text"
             class="form-control test-0-fat"
             placeholder="Returning"
+            v-model="form.date2"
           />
           <div class="invalid-feedback">Error message</div>
         </div>
         <div class="col-12 col-sm-6 col-lg-2 mt-3 col-xl-1 mt-lg-0 pr-xl-0">
-          <select class="form-control test-0-fnp">
+          <select v-model="form.passengers" class="form-control test-0-fnp">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -50,7 +54,12 @@
           <div class="invalid-feedback">Error message</div>
         </div>
         <div class="col-12 col-xl-1 px-2 mt-3 mt-xl-0">
-          <button class="btn btn-info form-control test-0-fbs">Search</button>
+          <button
+            @click="getFlights(this.form)"
+            class="btn btn-info form-control test-0-fbs"
+          >
+            Search
+          </button>
         </div>
       </div>
     </form>
@@ -58,8 +67,33 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
-  name: 'v-flight-search'
+  name: "v-flight-search",
+  data: () => ({
+    form: {
+      from: "",
+      to: "",
+      date1: "",
+      date2: "",
+      passengers: "",
+    },
+  }),
+  methods: {
+    ...mapActions(["GET_FLIGHTS"]),
+    getFlights() {
+      this.$router.push({
+        path: "/search",
+        query: {
+          from: this.form.from,
+          to: this.form.to,
+        },
+      });
+      this.GET_FLIGHTS(this.form);
+    },
+
+  },
 };
 </script>
 

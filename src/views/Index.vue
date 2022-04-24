@@ -1,7 +1,7 @@
 <template>
   <v-header />
   <div class="container">
-    <v-flight-search />
+    <v-flight-search  />
     <v-promo />
     <v-sub />
   </div>
