@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
   name: "v-flight-search",
@@ -80,6 +80,9 @@ export default {
       passengers: "",
     },
   }),
+  // mounted() {
+  //   localStorage.removeItem("result");
+  // },
   methods: {
     ...mapActions(["GET_FLIGHTS"]),
     getFlights() {
@@ -92,7 +95,6 @@ export default {
       });
       this.GET_FLIGHTS(this.form);
     },
-
   },
 };
 </script>

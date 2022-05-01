@@ -22,7 +22,13 @@
           <th>Flight time</th>
           <th>Cost</th>
         </tr>
-        <tr v-for="flight in FLIGHTS.flightsTo" :key="flight.index">
+        <tr
+          class="point"
+          v-for="(flight, index) in FLIGHTS.data.flights_to"
+          :key="index"
+          @click="getIndexTo(index)"
+          :class="{ 'point-active': indexTo === index }"
+        >
           <td class="test-4-fn">{{ flight.flight_code }}</td>
           <td class="test-4-at">Bombardier CRJ200</td>
           <td>
@@ -52,7 +58,13 @@
           <th>Flight time</th>
           <th>Cost</th>
         </tr>
-        <tr v-for="flight in FLIGHTS.flightsBack" :key="flight.index">
+        <tr
+          class="point"
+          v-for="(flight, index) in FLIGHTS.data.flights_back"
+          :key="index"
+          @click="getIndexBack(index)"
+          :class="{ 'point-active': indexBack === index }"
+        >
           <td class="test-4-fn">{{ flight.flight_code }}</td>
           <td class="test-4-at">Bombardier CRJ200</td>
           <td>
@@ -69,9 +81,11 @@
         </tr>
       </table>
 
-      <a href="booking.html" class="btn btn-info test-4-bgobook mt-4"
-        >Go to booking</a
-      >
+      <router-link @click="goBooking"
+        to="/booking" 
+        class="btn btn-info test-4-bgobook mt-4"
+      >Go to booking
+      </router-link>
     </section>
   </div>
 </template>
@@ -80,12 +94,40 @@
 import { mapGetters } from "vuex";
 
 export default {
+  data: () => ({
+    indexTo: "",
+    indexBack: "",
+  }),
   computed: {
     ...mapGetters(["FLIGHTS"]),
   },
-  data: () => ({}),
+  methods: {
+    getIndexTo(index) {
+      this.indexTo = index;
+    },
+    getIndexBack(index) {
+      this.indexBack = index;
+    },
+    goBooking(){
+      this.$router.push({
+        path: "/booking",
+        query: {
+          indexTo: this.indexTo,
+          indexBack: this.indexBack,
+        },
+      });
+    }
+  },
 };
 </script>
 
 <style>
+.point {
+  transition: 0.3s ease-in-out;
+}
+
+.point-active {
+  background-color: #555;
+}
+
 </style>
