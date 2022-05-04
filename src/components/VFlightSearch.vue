@@ -86,13 +86,7 @@ export default {
   methods: {
     ...mapActions(["GET_FLIGHTS"]),
     getFlights() {
-      this.$router.push({
-        path: "/search",
-        query: {
-          from: this.form.from,
-          to: this.form.to,
-        },
-      });
+      this.$router.push("/search");
       this.GET_FLIGHTS(this.form);
     },
   },

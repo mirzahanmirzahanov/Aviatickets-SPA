@@ -16,7 +16,7 @@ import VSub from "@/components/VSub.vue";
 import VFooter from "@/components/VFooter.vue";
 
 export default {
-  data: () =>[],
+  data: () => ({}),
   components: { VHeader, VFlightSearch, VPromo, VSub, VFooter },
 };
 </script>,

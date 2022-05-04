@@ -3,15 +3,15 @@
     <section class="mt-5">
       <div class="d-flex justify-content-between align-items-start">
         <h2 class="mb-4 text-white">We found the following flights</h2>
-        <a href="index.html" class="btn btn-sm btn-secondary test-4-bback"
-          >Back</a
+        <router-link to="/" class="btn btn-sm btn-secondary test-4-bback"
+          >Back</router-link
         >
       </div>
 
       <h5 class="mt-4 mb-3 text-white">
-        <span class="test-4-fif1">{{ this.$route.query.from }}</span>
+        <span class="test-4-fif1">{{ FLIGHTS.data.flights_to[0].from.city }}</span>
         ->
-        <span class="test-4-fit1">{{ this.$route.query.to }}</span>
+        <span class="test-4-fit1">{{ FLIGHTS.data.flights_to[0].to.city }}</span>
       </h5>
       <table class="table table-bordered text-white bg-secondary">
         <tr>
@@ -45,9 +45,9 @@
         </tr>
       </table>
       <h5 class="mt-4 mb-3 text-white">
-        <span class="test-4-fif1">{{ this.$route.query.to }}</span>
+        <span class="test-4-fif1">{{ FLIGHTS.data.flights_to[0].to.city }}</span>
         ->
-        <span class="test-4-fit1">{{ this.$route.query.from }}</span>
+        <span class="test-4-fit1">{{ FLIGHTS.data.flights_to[0].from.city }}</span>
       </h5>
       <table class="table table-bordered text-white bg-secondary">
         <tr>
@@ -81,10 +81,11 @@
         </tr>
       </table>
 
-      <router-link @click="goBooking"
-        to="/booking" 
+      <router-link
+        @click="goBooking"
+        to="/booking"
         class="btn btn-info test-4-bgobook mt-4"
-      >Go to booking
+        >Go to booking
       </router-link>
     </section>
   </div>
@@ -108,7 +109,7 @@ export default {
     getIndexBack(index) {
       this.indexBack = index;
     },
-    goBooking(){
+    goBooking() {
       this.$router.push({
         path: "/booking",
         query: {
@@ -116,7 +117,7 @@ export default {
           indexBack: this.indexBack,
         },
       });
-    }
+    },
   },
 };
 </script>
@@ -129,5 +130,4 @@ export default {
 .point-active {
   background-color: #555;
 }
-
 </style>
