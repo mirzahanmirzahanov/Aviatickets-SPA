@@ -73,16 +73,34 @@
     <section class="mt-5">
       <div class="d-flex justify-content-between align-items-baseline mb-4">
         <h4 class="text-white">Passengers</h4>
-        <button class="btn btn-info btn-sm test-5-add">Add passenger</button>
+        <button 
+          @click="addPassenger()"
+          class="btn btn-info btn-sm test-5-add"
+        >
+          Add passenger
+        </button>
       </div>
-
-      <form action="booking_management.html">
+      <div
+        v-for="(passenger, index) in PASSENGERS"
+        :key="index"
+        class="passengers-item"
+      >
+        <p class="passengers-item__first-name">{{ passenger.firstName }}</p>
+        <p class="passengers-item__last-name">{{ passenger.lastName }}</p>
+        <p class="passengers-item__document-number">{{ passenger.documentNumber }}</p>
+        <button 
+          class="btn btn-danger btn-sm test-5-remove"
+          @click="removePassenger(index)"
+        >remove</button>
+      </div>
+      <form>
         <div class="row">
           <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pr-lg-0">
             <input
               type="text"
               class="form-control test-5-name w-100"
               placeholder="First name"
+              v-model="formPassenger.firstName"
             />
           </div>
           <div class="col-12 col-sm-6 col-lg-4 mt-3 col-xl-3 mt-sm-0 pr-lg-0">
@@ -90,6 +108,7 @@
               type="text"
               class="form-control test-5-last w-100"
               placeholder="Last name"
+              v-model="formPassenger.lastName"
             />
           </div>
           <div class="col-12 col-sm-6 col-lg-2 mt-3 col-xl-2 mt-lg-0 pr-lg-0">
@@ -97,6 +116,7 @@
               type="text"
               class="form-control test-5-dob"
               placeholder="Date of Birth"
+              v-model="formPassenger.birthDate"
             />
           </div>
           <div class="col-12 col-sm-6 col-lg-2 mt-3 col-xl-2 mt-lg-0 pr-xl-0">
@@ -104,12 +124,13 @@
               type="text"
               class="form-control test-5-doc"
               placeholder="Document number"
+              v-model="formPassenger.documentNumber"
             />
           </div>
           <div class="col-12 col-xl-2 mt-3 mt-xl-0">
-            <button class="btn btn-danger btn-sm form-control test-5-bremove">
+            <!-- <button class="btn btn-danger btn-sm form-control test-5-bremove">
               Remove
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -122,14 +143,61 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
+  data: () => ({
+    formPassenger: {
+      firstName: '',
+      lastName: '',
+      birthDate: '',
+      documentNumber: '',
+    },
+
+  }),
   computed: {
-    ...mapGetters(["FLIGHTS"]),
+    ...mapGetters(["FLIGHTS", "PASSENGERS"]),
   },
+  methods:{
+    ...mapActions(['ADD_PASS', "REMOVE_PASS"]),
+    addPassenger() {
+      this.ADD_PASS(this.formPassenger)
+      this.formPassenger.firstName = ''
+      this.formPassenger.lastName = ''
+      this.formPassenger.birthDate = ''
+      this.formPassenger.documentNumber = ''
+    },
+    removePassenger(index) {
+      this.REMOVE_PASS(index)
+    }
+  }
 };
 </script>
 
 <style>
+.passengers-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* display: grid;
+  grid-template-columns: repeat(4,1fr); */
+  margin: 40px 0;
+  color: #fff;
+}
+.passengers-item p {
+  margin: 0;
+}
+
+.passengers-item__first-name {
+}
+
+.passengers-item__last-name {
+}
+
+.passengers-item__document-number {
+}
+
+
+
+
 </style>

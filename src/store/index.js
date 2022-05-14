@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import flights from './models/flights'
+import passengers from './models/passengers'
 
 export default createStore({
   // state: {
@@ -11,6 +12,7 @@ export default createStore({
   // actions: {
   // },
   modules: {
-    flights
+    flights,
+    passengers,
   }
 })

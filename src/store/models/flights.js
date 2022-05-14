@@ -8,7 +8,6 @@ export default {
 		SET_FLIGHTS_STATE(state, result) {
 			console.log(result);
 			localStorage.setItem('result', JSON.stringify(result))
-
 		}
 	},
 	actions: {
