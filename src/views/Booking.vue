@@ -243,12 +243,20 @@ export default {
           },
           passengers: [
             {
-              first_name: this.formPassenger.firstName,
-              last_name: this.formPassenger.lastName,
-              birth_date: this.formPassenger.birthDate,
-              document_number: this.formPassenger.documentNumber,
+              first_name: this.PASSENGERS[0].firstName,
+              last_name: this.PASSENGERS[0].lastName,
+              birth_date: this.PASSENGERS[0].birthDate,
+              document_number: this.PASSENGERS[0].documentNumber,
             },
           ],
+          // passengers: [
+          //   {
+          //     first_name: this.formPassenger.firstName,
+          //     last_name: this.formPassenger.lastName,
+          //     birth_date: this.formPassenger.birthDate,
+          //     document_number: this.formPassenger.documentNumber,
+          //   },
+          // ],
         }),
       });
       const result = await responce.json();
